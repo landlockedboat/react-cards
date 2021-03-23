@@ -10,6 +10,7 @@ function AddCardModal(props) {
 
     const handleTitleChange = (event) => {
         props.setNewCardInfo({
+            id: props.newCardInfo.id,
             title: event.target.value,
             description: props.newCardInfo.description,
             imageUrl: props.newCardInfo.imageUrl
@@ -18,6 +19,7 @@ function AddCardModal(props) {
 
     const handleDescriptionChange = (event) => {
         props.setNewCardInfo({
+            id: props.newCardInfo.id,
             title: props.newCardInfo.title,
             description: event.target.value,
             imageUrl: props.newCardInfo.imageUrl
@@ -26,20 +28,26 @@ function AddCardModal(props) {
 
     const handleImageUrlChange = (event) => {
         props.setNewCardInfo({
+            id: props.newCardInfo.id,
             title: props.newCardInfo.title,
             description: props.newCardInfo.description,
             imageUrl: event.target.value
         })
     }
 
+    const isAddingNewCard = props.newCardInfo.id <= -1;
+
     return (
         <div>
             <Dialog open={props.isModalOpen} onClose={props.handleCloseModal} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Nueva tarjeta</DialogTitle>
+                <DialogTitle id="form-dialog-title">
+                    {isAddingNewCard ? 'Nueva tarjeta' : 'Editar tarjeta'}
+                </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Crea una nueva tarjeta a través de este modal.
-            </DialogContentText>
+                        {isAddingNewCard ? 'Crea una nueva tarjeta a través de este modal.' :
+                            'Edita la información de una tarjeta existente.'}
+                    </DialogContentText>
                     <TextField
                         error={props.newCardInfo.title.length <= 0}
                         required
@@ -75,8 +83,8 @@ function AddCardModal(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={props.handleCreateNewCard} color="primary">
-                        Añadir
-            </Button>
+                        {isAddingNewCard ? 'Añadir' : 'Hecho'}
+                    </Button>
                 </DialogActions>
             </Dialog>
         </div>

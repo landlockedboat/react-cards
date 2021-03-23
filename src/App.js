@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import AddCardModal from './components/AddCardModal'
@@ -8,6 +9,7 @@ import CardGrid from './components/CardGrid'
 function App() {
   const [cards, setCards] = useState([]);
   const [newCardInfo, setNewCardInfo] = useState({
+    id: -1,
     title: "",
     description: "",
     imageUrl: ""
@@ -16,6 +18,7 @@ function App() {
 
   function eraseNewCardInfo() {
     setNewCardInfo({
+      id: -1,
       title: "",
       description: "",
       imageUrl: ""
@@ -32,10 +35,31 @@ function App() {
   };
 
   const handleCreateNewCard = () => {
-    if (newCardInfo.title && newCardInfo.description) {
-      setIsModalOpen(false);
+    if (!newCardInfo.title || !newCardInfo.description) {
+      return;
+    }
+
+    setIsModalOpen(false);
+
+    if (newCardInfo.id <= -1) {
       addCard(newCardInfo);
     }
+    else {
+      const newCards = cards.map((card) => {
+        if (card.id === newCardInfo.id) {
+          return newCardInfo;
+        } else {
+          return card;
+        }
+      });
+      setCards(newCards);
+    }
+  }
+
+  const handleEditCard = (id) => {
+    setIsModalOpen(true);
+    const cardToEdit = cards.find(card => card.id === id);
+    setNewCardInfo(cardToEdit);
   }
 
   function addCard(card) {
@@ -50,7 +74,7 @@ function App() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <CardGrid cards={cards}></CardGrid>
+      <CardGrid cards={cards} handleEditCard={handleEditCard}></CardGrid>
       <AddCardFab handleClickOpen={handleOpenModal}></AddCardFab>
       <AddCardModal
         isModalOpen={isModalOpen}
