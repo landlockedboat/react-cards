@@ -13,7 +13,8 @@ function AddCardModal(props) {
             id: props.newCardInfo.id,
             title: event.target.value,
             description: props.newCardInfo.description,
-            imageUrl: props.newCardInfo.imageUrl
+            imageUrl: props.newCardInfo.imageUrl,
+            creationDate: props.newCardInfo.creationDate
         })
     }
 
@@ -22,7 +23,8 @@ function AddCardModal(props) {
             id: props.newCardInfo.id,
             title: props.newCardInfo.title,
             description: event.target.value,
-            imageUrl: props.newCardInfo.imageUrl
+            imageUrl: props.newCardInfo.imageUrl,
+            creationDate: props.newCardInfo.creationDate
         })
     }
 
@@ -31,7 +33,8 @@ function AddCardModal(props) {
             id: props.newCardInfo.id,
             title: props.newCardInfo.title,
             description: props.newCardInfo.description,
-            imageUrl: event.target.value
+            imageUrl: event.target.value,
+            creationDate: props.newCardInfo.creationDate
         })
     }
 
