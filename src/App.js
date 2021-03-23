@@ -31,6 +31,8 @@ function App() {
     imageUrl: ""
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSortingByTitleAscending, setIsSortingByTitleAscending] = useState(true);
+  const [isSortingByCreationDateAscending, setIsSortingByCreationDateAscending] = useState(true);
 
   function eraseNewCardInfo() {
     setNewCardInfo({
@@ -88,13 +90,21 @@ function App() {
   }
 
   const handleSortCardsByTitle = () => {
-    const newCards = [].concat(cards).sort((a, b) => a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1);
+    const newCards = [].concat(cards).sort(function (a, b) {
+      const result = a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1;
+      return isSortingByTitleAscending ? result * -1 : result;
+    });
     setCards(newCards);
+    setIsSortingByTitleAscending(!isSortingByTitleAscending)
   }
 
   const handleSortCardsByCreationDate = () => {
-    const newCards = [].concat(cards).sort((a, b) => a.creationDate > b.creationDate ? 1 : -1);
+    const newCards = [].concat(cards).sort(function (a, b) {
+      const result = a.creationDate > b.creationDate ? 1 : -1;
+      return isSortingByCreationDateAscending ? result * -1 : result;
+    });
     setCards(newCards);
+    setIsSortingByCreationDateAscending(!isSortingByCreationDateAscending)
   }
 
   const handleEditCard = (id) => {
@@ -122,7 +132,9 @@ function App() {
       <CssBaseline />
       <Hero
         handleSortCardsByTitle={handleSortCardsByTitle}
-        handleSortCardsByCreationDate={handleSortCardsByCreationDate}>
+        handleSortCardsByCreationDate={handleSortCardsByCreationDate}
+        isSortingByTitleAscending={isSortingByTitleAscending}
+        isSortingByCreationDateAscending={isSortingByCreationDateAscending}>
       </Hero>
       <CardGrid cards={cards} handleEditCard={handleEditCard} handleEraseCard={handleEraseCard}></CardGrid>
       <AddCardFab handleClickOpen={handleOpenModal}></AddCardFab>

@@ -2,6 +2,8 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -32,11 +34,13 @@ function Hero(params) {
             <Grid item>
               <Button variant="contained" color="primary" onClick={params.handleSortCardsByTitle}>
                 Ordenar por título
+                {params.isSortingByTitleAscending ? <ArrowUpwardIcon></ArrowUpwardIcon> : <ArrowDownwardIcon></ArrowDownwardIcon>}
           </Button>
             </Grid>
             <Grid item>
               <Button variant="outlined" color="primary" onClick={params.handleSortCardsByCreationDate}>
                 Ordenar por fecha de creación
+                {params.isSortingByCreationDateAscending ? <ArrowUpwardIcon></ArrowUpwardIcon> : <ArrowDownwardIcon></ArrowDownwardIcon>}
           </Button>
             </Grid>
           </Grid>
