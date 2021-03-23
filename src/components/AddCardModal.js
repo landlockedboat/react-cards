@@ -56,7 +56,7 @@ function AddCardModal(props) {
                         required
                         autoFocus
                         margin="dense"
-                        id="title"
+                        id="modal-input-card-title"
                         label="Título"
                         type="text"
                         value={props.newCardInfo.title}
@@ -67,7 +67,7 @@ function AddCardModal(props) {
                         error={props.newCardInfo.description <= 0}
                         required
                         margin="dense"
-                        id="description"
+                        id="modal-input-card-description"
                         label="Descripción"
                         type="text"
                         value={props.newCardInfo.description}
@@ -76,7 +76,7 @@ function AddCardModal(props) {
                     />
                     <TextField
                         margin="dense"
-                        id="url"
+                        id="modal-input-card-url"
                         label="Imagen (Url)"
                         type="text"
                         value={props.newCardInfo.imageUrl}
@@ -85,7 +85,7 @@ function AddCardModal(props) {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={props.handleCreateNewCard} color="primary">
+                    <Button onClick={props.handleCreateNewCard} color="primary" id="create-new-card-button">
                         {isAddingNewCard ? 'Añadir' : 'Hecho'}
                     </Button>
                 </DialogActions>

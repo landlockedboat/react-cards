@@ -23,7 +23,7 @@ function AddCardFab(props) {
     return (
         <div className={classes.fabWrapper}>
             <div className={classes.fab}>
-                <Fab color="primary" aria-label="add" onClick={props.handleClickOpen}>
+                <Fab id="add-card-fab" color="primary" aria-label="add" onClick={props.handleClickOpen}>
                     <AddIcon />
                 </Fab>
             </div>
