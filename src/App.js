@@ -56,6 +56,20 @@ function App() {
     }
   }
 
+  const handleEraseCard = (id) => {
+    // The last .map is done in order to regenerate ids based on indices
+    const newCards = cards.filter((card) => { return card.id !== id }).map((card, i) => {
+      return {
+        id: i,
+        title: card.title,
+        description: card.description,
+        imageUrl: card.imageUrl
+      }
+    }
+    );
+    setCards(newCards);
+  }
+
   const handleEditCard = (id) => {
     setIsModalOpen(true);
     const cardToEdit = cards.find(card => card.id === id);
@@ -74,7 +88,7 @@ function App() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <CardGrid cards={cards} handleEditCard={handleEditCard}></CardGrid>
+      <CardGrid cards={cards} handleEditCard={handleEditCard} handleEraseCard={handleEraseCard}></CardGrid>
       <AddCardFab handleClickOpen={handleOpenModal}></AddCardFab>
       <AddCardModal
         isModalOpen={isModalOpen}

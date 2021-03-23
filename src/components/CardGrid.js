@@ -19,7 +19,7 @@ function CardGrid(params) {
             <Grid container spacing={4}>
                 {params.cards.map((card) => (
                     <Grid item key={card.id} xs={12} sm={6} md={4}>
-                        <MyCard card={card} handleEditCard={params.handleEditCard}></MyCard>
+                        <MyCard card={card} handleEditCard={params.handleEditCard} handleEraseCard={params.handleEraseCard}></MyCard>
                     </Grid>
                 ))}
             </Grid>

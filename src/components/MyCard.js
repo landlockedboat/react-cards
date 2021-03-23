@@ -29,15 +29,11 @@ function MyCard(params) {
 
     const [isHovering, setIsHovering] = useState(false);
 
-    const handleMouseHover = () => {
-        setIsHovering(!isHovering)
-    }
-
     return (
         <Card
             className={classes.card}
-            onMouseEnter={handleMouseHover}
-            onMouseLeave={handleMouseHover}>
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}>
             <CardMedia
                 className={classes.cardMedia}
                 image={params.card.imageUrl}
@@ -55,6 +51,11 @@ function MyCard(params) {
                 <Zoom in={isHovering} >
                     <Button size="small" color="primary" onClick={() => params.handleEditCard(params.card.id)}>
                         Editar
+                    </Button>
+                </Zoom>
+                <Zoom in={isHovering} >
+                    <Button size="small" color="primary" onClick={() => params.handleEraseCard(params.card.id)}>
+                        Borrar
                     </Button>
                 </Zoom>
             </CardActions>
