@@ -2,6 +2,14 @@
   text-align: center;
 }
 
+.flexbox{
+  display: flex;
+  position: fixed;
+  width: 100%;
+  justify-content: center;
+  bottom: 5vh;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
