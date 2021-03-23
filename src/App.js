@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 
@@ -7,14 +7,29 @@ import AddCardFab from './components/AddCardFab'
 import CardGrid from './components/CardGrid'
 
 function App() {
-  const [cards, setCards] = useState([]);
+
+  const useStateWithLocalStorage = (localStorageKey, defaultValue) => {
+    const [value, setValue] = useState(
+      JSON.parse(localStorage.getItem(localStorageKey)) || defaultValue
+    );
+   
+    useEffect(() => {
+      localStorage.setItem(localStorageKey, JSON.stringify(value));
+    }, [value]);
+   
+    return [value, setValue];
+  };
+
+  const [cards, setCards] = useStateWithLocalStorage('cards', []);
+
   const [newCardInfo, setNewCardInfo] = useState({
     id: -1,
     title: "",
     description: "",
     imageUrl: ""
   });
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   function eraseNewCardInfo() {
     setNewCardInfo({
